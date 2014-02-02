@@ -8,7 +8,7 @@
 Summary:	Bitcoin utility library
 Name:		python-pycoin
 Version:	0.24
-Release:	1
+Release:	2
 License:	MIT
 Group:		Development/Languages/Python
 Source0:	https://github.com/richardkiss/pycoin/archive/%{version}.tar.gz
@@ -34,8 +34,6 @@ useful when dealing with Bitcoin stuff.
 
 %package -n	python3-%{module}
 Summary:	Bitcoin utility library
-Version:	0.24
-Release:	1
 Group:		Libraries/Python
 Requires:	python3
 
@@ -45,16 +43,10 @@ useful when dealing with Bitcoin stuff.
 
 %package -n	%{module}
 Summary:	Bitcoin utility library - tools
-Version:	0.24
-Release:	1
 Group:		Libraries/Python
-%if %{with python3}
-Requires:	python3
-Requires:	python3-%{module} = %{version}-%{release}
-%else
-Requires:	%{name} = %{version}-%{release}
-Requires:	python
-%endif
+Requires:	python%{?with_python3:3}
+Requires:	python%{?with_python3:3}-%{module} = %{version}-%{release}
+Requires:	python%{?with_python3:3}-distribute
 
 %description -n %{module}
 Tools that use %{module} library.
