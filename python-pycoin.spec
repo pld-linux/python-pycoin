@@ -13,6 +13,7 @@ Group:		Development/Languages/Python
 Source0:	https://github.com/richardkiss/pycoin/archive/%{version}.tar.gz
 # Source0-md5:	512f17827323eb1ba2bfe7952829575d
 URL:		https://github.com/richardkiss/pycoin
+BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	rpm-pythonprov
 %if %{with python2}
 BuildRequires:	python-devel
