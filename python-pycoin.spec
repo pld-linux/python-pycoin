@@ -5,26 +5,31 @@
 
 %define		module	pycoin
 Summary:	Bitcoin utility library
+Summary(pl.UTF-8):	Biblioteka narzędziowa Bitcoin
 Name:		python-pycoin
 Version:	0.24
 Release:	10
 License:	MIT
-Group:		Development/Languages/Python
+Group:		Libraries/Python
+#Source0Download: https://github.com/richardkiss/pycoin/releases
+#TODO: use	https://github.com/richardkiss/pycoin/archive/%{version}/pycoin-%{version}.tar.gz
 Source0:	https://github.com/richardkiss/pycoin/archive/%{version}.tar.gz
 # Source0-md5:	512f17827323eb1ba2bfe7952829575d
 URL:		https://github.com/richardkiss/pycoin
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	rpm-pythonprov
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
+BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-2to3
 BuildRequires:	python3-devel
 BuildRequires:	python3-modules
+BuildRequires:	python3-setuptools
 %endif
-Requires:	python
+Requires:	python-modules
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -32,24 +37,37 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is an implementation of a bunch of utility routines that may be
 useful when dealing with Bitcoin stuff.
 
-%package -n	python3-%{module}
+%description -l pl.UTF-8
+Implementacja zbioru funkcji narzędziowych, które mogą być przydatne
+przy operowaniu na Bitcoinach.
+
+%package -n python3-%{module}
 Summary:	Bitcoin utility library
+Summary(pl.UTF-8):	Biblioteka narzędziowa Bitcoin
 Group:		Libraries/Python
-Requires:	python3
+Requires:	python3-modules
 
 %description -n python3-%{module}
 This is an implementation of a bunch of utility routines that may be
 useful when dealing with Bitcoin stuff.
 
-%package -n	%{module}
+%description -n python3-%{module} -l pl.UTF-8
+Implementacja zbioru funkcji narzędziowych, które mogą być przydatne
+przy operowaniu na Bitcoinach.
+
+%package -n %{module}
 Summary:	Bitcoin utility library - tools
+Summary(pl.UTF-8):	Biblioteka narzędziowa Bitcoin - narzędzia
 Group:		Libraries/Python
 Requires:	python%{?with_python3:3}
 Requires:	python%{?with_python3:3}-%{module} = %{version}-%{release}
 Requires:	python%{?with_python3:3}-distribute
 
 %description -n %{module}
-Tools that use %{module} library.
+Tools that use pycoin library.
+
+%description -n %{module} -l pl.UTF-8
+Narzędzia wykorzystująca bibliotekę pycoin.
 
 %prep
 %setup  -q -n pycoin-%{version}
@@ -58,12 +76,14 @@ Tools that use %{module} library.
 %if %{with python2}
 %py_build
 %endif
+
 %if %{with python3}
 %py3_build
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %if %{with python2}
 install -d $RPM_BUILD_ROOT%{_examplesdir}/python-%{module}-%{version}
 %py_install
