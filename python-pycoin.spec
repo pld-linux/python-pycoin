@@ -8,7 +8,7 @@ Summary:	Bitcoin utility library
 Summary(pl.UTF-8):	Biblioteka narzędziowa Bitcoin
 Name:		python-pycoin
 Version:	0.24
-Release:	15
+Release:	16
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://github.com/richardkiss/pycoin/releases
@@ -61,7 +61,7 @@ Summary(pl.UTF-8):	Biblioteka narzędziowa Bitcoin - narzędzia
 Group:		Libraries/Python
 Requires:	python%{?with_python3:3}
 Requires:	python%{?with_python3:3}-%{module} = %{version}-%{release}
-Requires:	python%{?with_python3:3}-distribute
+%{!?with_python3:Requires:	python-distribute}
 
 %description -n %{module}
 Tools that use pycoin library.
